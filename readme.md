@@ -18,30 +18,30 @@ import "fmt"
 func main() {
 	// initalize with your Token
 	token := "XXXXXXXXXXXXXXXXXXX"
-	lbg.New(token)
+	pb.New(token)
 
 	// list all devices
 	fmt.Print(lbg.Devices())
 
 	// push note
-	lbg.PushNote(lbg.MakeNote("Title","Body"))
+	pb.PushNote(lbg.MakeNote("Title","Body"))
 
 	// push link
-	lbg.PushLink(lbg.MakeLink("Title","Body","http://goo.gl"))
+	pb.PushLink(lbg.MakeLink("Title","Body","http://goo.gl"))
 
 	// push checklist
-	lbg.PushList(lbg.MakeList("Title",[]string{"A","B"}))
+	pb.PushList(lbg.MakeList("Title",[]string{"A","B"}))
 
 	// push address
-	lbg.PushAddress(lbg.MakeAddress("Name", "Address"))
+	pb.PushAddress(lbg.MakeAddress("Name", "Address"))
 
 	// push file
-	lbg.PushFile("path_to_file")
+	pb.PushFile("path_to_file")
 
 	// push to speific device
 	note := lbg.MakeNote("Title","Body")
 	note.SetTarget(lbg.Target_DevIden, "your_device_iden")
-	lbg.PushNote(note)
+	pb.PushNote(note)
 
 }
 ```
@@ -62,4 +62,4 @@ Commands:
 ```
 
 
-Functions for updating existed pushes or information will be added soon.
+Functions for manipulating existed pushes or information will be added soon.
