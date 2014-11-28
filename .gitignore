@@ -1,4 +1,7 @@
-*
+/*
+!/bulletgo
+/bulletgo/*
+!/bulletgo/*.go
 !*.go
 !*.md
 !.gitignore

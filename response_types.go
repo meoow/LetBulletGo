@@ -53,7 +53,7 @@ type AddressResp struct {
 	Error Error  `json:"error"`
 }
 
-type FileResp struct {
+type _fileResp struct {
 	FileType  string `json:"file_type"`
 	FileName  string `json:"file_name"`
 	FileUrl   string `json:"file_url"`
@@ -67,6 +67,14 @@ type FileResp struct {
 		ContentType    string `json:"content-type"`
 	} `json:"data"`
 	Error Error `json:"error"`
+}
+
+type FileResp struct {
+	CommonResp
+	FileName string `json:"file_name"`
+	FileType string `json:"file_type"`
+	FileUrl  string `json:"file_url"`
+	Error    Error  `json:"error"`
 }
 
 type PushesResp struct {
@@ -126,4 +134,18 @@ type MeResp struct {
 		} `json:"onboarding"`
 		Social bool `json:"social"`
 	} `json:"preferences"`
+	Error Error `json:"error"`
+}
+
+type ContactsResp struct {
+	Contacts []struct {
+		Iden            string `json:"iden"`
+		Name            string `json:"name"`
+		Created         string `json:"created"`
+		Modified        string `json:"modified"`
+		Email           string `json:"email"`
+		EmailNormalized string `json:"email_normalized"`
+		Active          bool   `json:"active"`
+	} `json:"contacts"`
+	Error Error `json:"error"`
 }
