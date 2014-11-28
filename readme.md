@@ -45,3 +45,21 @@ func main() {
 
 }
 ```
+
+Command line tool is in bulletgo directory  
+Usage:  
+```
+Usage:
+bulletgo TOKEN COMMAND [ARGS ...]
+Commands:
+  devices  : list all assoicated devices of your token
+  contacts : list all contacts
+  note [title] body : push note
+  list title item1 [item2 ...] : push checklist
+  addr [name] address : push address
+  link [title] [body] url : push link
+  file filename : push file
+```
+
+
+Functions for updating existed pushes or information will be added soon.
