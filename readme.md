@@ -17,7 +17,7 @@ import "fmt"
 
 func main() {
 	// initalize with your Token
-	token = "XXXXXXXXXXXXXXXXXXX"
+	token := "XXXXXXXXXXXXXXXXXXX"
 	lbg.New(token)
 
 	// list all devices
