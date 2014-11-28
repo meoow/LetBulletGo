@@ -18,7 +18,7 @@ import "fmt"
 func main() {
 	// initalize with your Token
 	token := "XXXXXXXXXXXXXXXXXXX"
-	pb.New(token)
+	pb := lbg.New(token)
 
 	// list all devices
 	fmt.Print(pb.Devices())
