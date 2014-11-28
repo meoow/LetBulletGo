@@ -33,7 +33,7 @@ func main() {
 	lbg.PushList(lbg.MakeList("Title",[]string{"A","B"}))
 
 	// push address
-	lbg.PushList(lbg.MakeAddress("Name", "Address"))
+	lbg.PushAddress(lbg.MakeAddress("Name", "Address"))
 
 	// push file
 	lbg.PushFile("path_to_file")
