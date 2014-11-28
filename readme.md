@@ -21,7 +21,10 @@ func main() {
 	pb.New(token)
 
 	// list all devices
-	fmt.Print(lbg.Devices())
+	fmt.Print(pb.Devices())
+
+	// list all contacts
+	fmt.Print(pb.Contacts())
 
 	// push note
 	pb.PushNote(lbg.MakeNote("Title","Body"))
