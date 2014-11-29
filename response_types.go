@@ -20,6 +20,7 @@ type CommonResp struct {
 	ReceiverIden            string  `json:"receiver_iden"`
 	ReceiverEmail           string  `json:"receiver_email"`
 	ReceiverEmailNormalized string  `json:"receiver_email_normalized"`
+	TargetDevIden           string  `json:"target_device_iden"`
 }
 
 type NoteResp struct {
@@ -75,16 +76,6 @@ type FileResp struct {
 	FileType string `json:"file_type"`
 	FileUrl  string `json:"file_url"`
 	Error    Error  `json:"error"`
-}
-
-type PushesResp struct {
-	Pushes []struct {
-		CommonResp
-		Title string `json:"title"`
-		Body  string `json:"body"`
-		Url   string `json:"url"`
-	} `json:"pushes"`
-	Error Error `json:"error"`
 }
 
 type DevicesResp struct {

@@ -16,6 +16,7 @@ const (
 Commands:
   devices  : list all assoicated devices of your token
   contacts : list all contacts
+  pushes : list all active pushes
   note [title] body : push note
   list title item1 [item2 ...] : push checklist
   addr [name] address : push address
@@ -52,6 +53,16 @@ func main() {
 		fmt.Print(out)
 	case "contacts":
 		out, err := pb.Contacts()
+		if err != nil {
+			log.Fatal(err)
+		}
+		if out.Error.Type != "" {
+			fmt.Fprintf(os.Stderr, "ERROR %s: %s\n", out.Error.Type, out.Error.Message)
+			os.Exit(1)
+		}
+		fmt.Print(out)
+	case "pushes":
+		out, err := pb.GetPushes(0)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -199,6 +210,9 @@ func main() {
 		}
 		fmt.Println(out.FileUrl)
 		return
+	default:
+		flag.Usage()
+		os.Exit(1)
 	}
 
 }
