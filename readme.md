@@ -63,6 +63,7 @@ bulletgo TOKEN COMMAND [ARGS ...]
 Commands:
   devices  : list all assoicated devices of your token
   contacts : list all contacts
+  pushes : list all active pushes
   note [title] body : push note
   list title item1 [item2 ...] : push checklist
   addr [name] address : push address
