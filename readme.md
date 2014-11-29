@@ -21,10 +21,16 @@ func main() {
 	pb := lbg.New(token)
 
 	// list all devices
-	fmt.Print(pb.Devices())
+	out, _ := pb.Devices()
+	fmt.Print(out
 
 	// list all contacts
-	fmt.Print(pb.Contacts())
+	out, _ := pb.Contacts()
+	fmt.Print(out)
+
+	// retrieve all pushes
+	out, _ := pb.GetPushes(0) // 0 is timestamp
+	fmt.Print(out)
 
 	// push note
 	pb.PushNote(lbg.MakeNote("Title","Body"))
