@@ -22,7 +22,7 @@ func main() {
 
 	// list all devices
 	out, _ := pb.Devices()
-	fmt.Print(out
+	fmt.Print(out)
 
 	// list all contacts
 	out, _ := pb.Contacts()
