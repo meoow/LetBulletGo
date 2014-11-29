@@ -39,7 +39,7 @@ func (p *pushBullet) Devices() (*DevicesResp, error) {
 func (d *DevicesResp) String() string {
 	buf := new(bytes.Buffer)
 	for _, dev := range d.Devices {
-		buf.WriteString(fmt.Sprintf("Device: \033[32m%s\033[0m\n", dev.Nickname))
+		buf.WriteString(fmt.Sprintf("Device: %s\n", dev.Nickname))
 		buf.WriteString(fmt.Sprintf("  Type:     %s\n", dev.Type))
 		buf.WriteString(fmt.Sprintf("  Model:    %s\n", dev.Model))
 		buf.WriteString(fmt.Sprintf("  Iden:     %s\n", dev.Iden))
