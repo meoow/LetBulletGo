@@ -78,26 +78,6 @@ type FileResp struct {
 	Error    Error  `json:"error"`
 }
 
-type DevicesResp struct {
-	Devices []struct {
-		Iden         string  `json:"iden"`
-		PushToken    string  `json:"push_token"`
-		AppVersion   int     `json:"app_version"`
-		Fingerprint  string  `json:"fingerprint"`
-		Active       bool    `json:"active"`
-		Nickname     string  `json:"nickname"`
-		Manufacturer string  `json:"manufacturer"`
-		Type         string  `json:"type"`
-		Kind         string  `json:"king"` // alias for Type
-		Created      float64 `json:"created"`
-		Modified     float64 `json:"modified"`
-		Model        string  `json:"model"`
-		Pushable     bool    `json:"pushable"`
-		HasSMS       bool    `json:"has_sms"`
-	} `json:"devices"`
-	Error Error `json:"error"`
-}
-
 type UpdateDevsResp struct {
 	Iden     string `json:"iden"`
 	Nickname string `json:"nickname"`

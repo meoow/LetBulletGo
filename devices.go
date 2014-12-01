@@ -12,6 +12,26 @@ const (
 	devUrl string = "https://api.pushbullet.com/v2/devices"
 )
 
+type DevicesResp struct {
+	Devices []struct {
+		Iden         string  `json:"iden"`
+		PushToken    string  `json:"push_token"`
+		AppVersion   int     `json:"app_version"`
+		Fingerprint  string  `json:"fingerprint"`
+		Active       bool    `json:"active"`
+		Nickname     string  `json:"nickname"`
+		Manufacturer string  `json:"manufacturer"`
+		Type         string  `json:"type"`
+		Kind         string  `json:"king"` // alias for Type
+		Created      float64 `json:"created"`
+		Modified     float64 `json:"modified"`
+		Model        string  `json:"model"`
+		Pushable     bool    `json:"pushable"`
+		HasSMS       bool    `json:"has_sms"`
+	} `json:"devices"`
+	Error Error `json:"error"`
+}
+
 func (p *pushBullet) Devices() (*DevicesResp, error) {
 	req, err := http.NewRequest("GET", devUrl, nil)
 	req.SetBasicAuth(p.Token, "")
@@ -39,6 +59,9 @@ func (p *pushBullet) Devices() (*DevicesResp, error) {
 func (d *DevicesResp) String() string {
 	buf := new(bytes.Buffer)
 	for _, dev := range d.Devices {
+		if !dev.Active {
+			continue
+		}
 		buf.WriteString(fmt.Sprintf("Device: %s\n", dev.Nickname))
 		buf.WriteString(fmt.Sprintf("  Type:     %s\n", dev.Type))
 		buf.WriteString(fmt.Sprintf("  Model:    %s\n", dev.Model))

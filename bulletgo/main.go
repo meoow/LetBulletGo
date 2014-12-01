@@ -22,6 +22,9 @@ Commands:
   addr [name] address : push address
   link [title] [body] url : push link
   file filename : push file
+
+Environment Variable:
+  BULLETGO_DEV : push to specific device by setting its Iden
 `
 )
 
@@ -40,6 +43,14 @@ func main() {
 	}
 	token := flag.Arg(0)
 	pb := lbg.New(token)
+
+	var devIden string
+	if os.Getenv("BULLETGO_DEV") != "" {
+		devIden = os.Getenv("BULLETGO_DEV")
+	}
+	if len(devIden) != 22 {
+		devIden = ""
+	}
 	switch flag.Arg(1) {
 	case "devices":
 		out, err := pb.Devices()
@@ -82,6 +93,9 @@ func main() {
 			title = ""
 			body = flag.Arg(2)
 			note := lbg.MakeNote(title, body)
+			if devIden != "" {
+				note.SetTarget(lbg.Target_DevIden, devIden)
+			}
 			resp, err := pb.PushNote(note)
 			if err != nil {
 				log.Fatal(err)
@@ -95,6 +109,9 @@ func main() {
 			title = flag.Arg(2)
 			body = strings.Join(flag.Args()[3:], " ")
 			note := lbg.MakeNote(title, body)
+			if devIden != "" {
+				note.SetTarget(lbg.Target_DevIden, devIden)
+			}
 			out, err := pb.PushNote(note)
 			if err != nil {
 				log.Fatal(err)
@@ -113,6 +130,9 @@ func main() {
 		title := flag.Arg(2)
 		items := flag.Args()[3:]
 		list := lbg.MakeList(title, items)
+		if devIden != "" {
+			list.SetTarget(lbg.Target_DevIden, devIden)
+		}
 		out, err := pb.PushList(list)
 		if err != nil {
 			log.Fatal(err)
@@ -132,6 +152,9 @@ func main() {
 			body := ""
 			url := flag.Arg(2)
 			link := lbg.MakeLink(title, body, url)
+			if devIden != "" {
+				link.SetTarget(lbg.Target_DevIden, devIden)
+			}
 			out, err := pb.PushLink(link)
 			if err != nil {
 				log.Fatal(err)
@@ -146,6 +169,9 @@ func main() {
 			body := ""
 			url := flag.Arg(3)
 			link := lbg.MakeLink(title, body, url)
+			if devIden != "" {
+				link.SetTarget(lbg.Target_DevIden, devIden)
+			}
 			out, err := pb.PushLink(link)
 			if err != nil {
 				log.Fatal(err)
@@ -160,6 +186,9 @@ func main() {
 			body := flag.Arg(3)
 			url := flag.Arg(4)
 			link := lbg.MakeLink(title, body, url)
+			if devIden != "" {
+				link.SetTarget(lbg.Target_DevIden, devIden)
+			}
 			out, err := pb.PushLink(link)
 			if err != nil {
 				log.Fatal(err)
@@ -185,6 +214,9 @@ func main() {
 			address = flag.Arg(3)
 		}
 		addr := lbg.MakeAddress(name, address)
+		if devIden != "" {
+			addr.SetTarget(lbg.Target_DevIden, devIden)
+		}
 		out, err := pb.PushAddress(addr)
 		if err != nil {
 			log.Fatal(err)
