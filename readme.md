@@ -1,7 +1,8 @@
 # LetBulletGo
 ## A Library and CLI tool interfacing PushBullet APIs
 
-Pushing functions are implemented, full APIs supporting and CLI tool wil update soon.
+Almost full APIs supporting.
+CLI tool is in bulletgo folder.
 
 ###Install
 ```sh
