@@ -120,3 +120,7 @@ type ContactsResp struct {
 	} `json:"contacts"`
 	Error Error `json:"error"`
 }
+
+type DeleteResp struct {
+	Error Error `json:"error"`
+}

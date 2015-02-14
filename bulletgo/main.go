@@ -12,7 +12,7 @@ import (
 
 const (
 	usage string = `Usage:
-%s TOKEN COMMAND [ARGS ...]
+%s (TOKEN|-) COMMAND [ARGS ...]
 Commands:
   devices  : list all assoicated devices of your token
   contacts : list all contacts
@@ -24,7 +24,8 @@ Commands:
   file filename : push file
 
 Environment Variable:
-  BULLETGO_DEV : push to specific device by setting its Iden
+  BULLETGO_TOKEN : your account's token for bulletgo, if set '-' in arguments.
+  BULLETGO_DEV   : push to specific device by indicating its Iden
 `
 )
 
@@ -41,7 +42,11 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
+
 	token := flag.Arg(0)
+	if token == "-" {
+		token = os.Getenv("BULLETGO_TOKEN")
+	}
 	pb := lbg.New(token)
 
 	var devIden string
