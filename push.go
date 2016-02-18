@@ -18,11 +18,11 @@ const (
 )
 
 type pushBullet struct {
-	Token string
+	token string
 }
 
 func New(token string) *pushBullet {
-	return &pushBullet{Token: token}
+	return &pushBullet{token: token}
 }
 
 func (p *pushBullet) getData(jsonData []byte) ([]byte, error) {
@@ -32,7 +32,7 @@ func (p *pushBullet) getData(jsonData []byte) ([]byte, error) {
 		return []byte{}, err
 	}
 	req.Header.Add("Content-Type", "application/json")
-	req.SetBasicAuth(p.Token, "")
+	req.SetBasicAuth(p.token, "")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

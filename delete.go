@@ -10,13 +10,17 @@ const (
 	delUrl string = "https://api.pushbullet.com/v2/pushes"
 )
 
+type DeleteResp struct {
+	Error Error `json:"error"`
+}
+
 func (p *pushBullet) Delete(iden string) (*DeleteResp, error) {
 
 	fullDelUrl := delUrl + "/" + iden
 
 	req, err := http.NewRequest("DELETE", fullDelUrl, nil)
 	req.Header.Add("Content-Type", "application/json")
-	req.SetBasicAuth(p.Token, "")
+	req.SetBasicAuth(p.token, "")
 
 	client := &http.Client{}
 

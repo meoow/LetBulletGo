@@ -12,9 +12,22 @@ const (
 	contUrl string = "https://api.pushbullet.com/v2/contacts"
 )
 
+type ContactsResp struct {
+	Contacts []struct {
+		Iden            string `json:"iden"`
+		Name            string `json:"name"`
+		Created         string `json:"created"`
+		Modified        string `json:"modified"`
+		Email           string `json:"email"`
+		EmailNormalized string `json:"email_normalized"`
+		Active          bool   `json:"active"`
+	} `json:"contacts"`
+	Error Error `json:"error"`
+}
+
 func (p *pushBullet) Contacts() (*ContactsResp, error) {
 	req, err := http.NewRequest("GET", contUrl, nil)
-	req.SetBasicAuth(p.Token, "")
+	req.SetBasicAuth(p.token, "")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

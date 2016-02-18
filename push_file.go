@@ -18,6 +18,40 @@ const (
 	uploadUrl string = "https://api.pushbullet.com/v2/upload-request"
 )
 
+type File struct {
+	Type     string `json:"type"`
+	FileName string `json:"file_name"`
+	FileType string `json:"file_type"`
+	FileUrl  string `json:"file_url"`
+	Body     string `json:"body"`
+	Target
+	OptinalParam
+}
+
+type _fileResp struct {
+	FileType  string `json:"file_type"`
+	FileName  string `json:"file_name"`
+	FileUrl   string `json:"file_url"`
+	UploadUrl string `json:"upload_url"`
+	Data      struct {
+		AWSAccessKeyID string `json:"awsaccesskeyid"`
+		ACL            string `json:"acl"`
+		Key            string `json:"key"`
+		Signature      string `json:"signature"`
+		Policy         string `json:"policy"`
+		ContentType    string `json:"content-type"`
+	} `json:"data"`
+	Error Error `json:"error"`
+}
+
+type FileResp struct {
+	CommonResp
+	FileName string `json:"file_name"`
+	FileType string `json:"file_type"`
+	FileUrl  string `json:"file_url"`
+	Error    Error  `json:"error"`
+}
+
 func (p *pushBullet) PushFile(pathOfFile string) (*FileResp, error) {
 	basename := filepath.Base(pathOfFile)
 	filetype := mime.TypeByExtension(filepath.Ext(pathOfFile))
@@ -35,7 +69,7 @@ func (p *pushBullet) PushFile(pathOfFile string) (*FileResp, error) {
 	}
 	authReq.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	authReq.Header.Add("Content-Length", strconv.Itoa(len(authdata.Encode())))
-	authReq.SetBasicAuth(p.Token, "")
+	authReq.SetBasicAuth(p.token, "")
 
 	authResp, err := client.Do(authReq)
 	if err != nil {
@@ -159,4 +193,20 @@ func (p *pushBullet) PushFile(pathOfFile string) (*FileResp, error) {
 	}
 	// log.Println(string(finalJson))
 	return finalResp, nil
+}
+
+func MakeFile(fileName, fileType, fileUrl, body string) *File {
+	return &File{Type: "file", FileName: fileName, FileType: fileType,
+		FileUrl: fileUrl, Body: body}
+}
+
+func (p *File) SetTarget(target int, id string) {
+	switch target {
+	case Target_DevIden:
+		p.DevIden = id
+	case Target_Email:
+		p.Email = id
+	case Target_Channel:
+		p.Channel = id
+	}
 }

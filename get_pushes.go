@@ -37,7 +37,7 @@ func (p *pushBullet) GetPushes(timestamp float64) (*PushesResp, error) {
 	u.RawQuery = q.Encode()
 
 	req, err := http.NewRequest("GET", u.String(), nil)
-	req.SetBasicAuth(p.Token, "")
+	req.SetBasicAuth(p.token, "")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

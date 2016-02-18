@@ -15,7 +15,7 @@ const (
 type DevicesResp struct {
 	Devices []struct {
 		Iden         string  `json:"iden"`
-		PushToken    string  `json:"push_token"`
+		Pushtoken    string  `json:"push_token"`
 		AppVersion   int     `json:"app_version"`
 		Fingerprint  string  `json:"fingerprint"`
 		Active       bool    `json:"active"`
@@ -34,7 +34,7 @@ type DevicesResp struct {
 
 func (p *pushBullet) Devices() (*DevicesResp, error) {
 	req, err := http.NewRequest("GET", devUrl, nil)
-	req.SetBasicAuth(p.Token, "")
+	req.SetBasicAuth(p.token, "")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
